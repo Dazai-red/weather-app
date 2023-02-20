@@ -1,10 +1,40 @@
-window.addEventListener('load', ()=>{
+window.addEventListener('load', ()=> {
+
+    buttonOpenRecord = document.getElementById('open-record')
+    buttonCloseRecord = document.getElementById('close-record');
+    buttonClearRecord = document.getElementById('clear-record');
+    windowRecord = document.getElementById('window-record');
+    containerRecord = document.getElementById('record-container');
+    
+    
+    windowErrors = document.getElementById('window-errors');
+    buttonCloseErrors = document.getElementById('close-errors');
+    containerErrors = document.getElementById('errors-container');
+
+    buttonOpenRecord.addEventListener('click', () => {
+        containerRecord.innerHTML = getDataFromBrowser();
+        windowRecord.classList.add('window-record--open');
+    });
+
+    buttonCloseRecord.addEventListener('click', ()=> {
+        windowRecord.classList.remove('window-record--open');
+    });
+    
+    buttonClearRecord.addEventListener('click', ()=>{
+        localStorage.clear();
+        containerRecord.innerHTML = '';
+    });
+        
+    buttonCloseErrors.addEventListener('click', () =>{
+        windowErrors.classList.remove('window-errors--open');   
+    });
 
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(geoPosOk, geoPosKo);
     }else{
         console.log('Tu navegador no dispone de la API de geolocalización');
     }
+
 
 });
 
@@ -35,7 +65,14 @@ function geoPosKo(err){
             msg = "Error desconocido";
             break;
     }
-    console.log(msg);
+    
+    printErrors(msg);
+
+}
+
+const printErrors = (error) => {
+    windowErrors.classList.add('window-errors--open');
+    containerErrors.innerHTML = error;
 }
 
 const getWeatherByCoords = async(lat, lon) =>{
@@ -45,19 +82,23 @@ const getWeatherByCoords = async(lat, lon) =>{
 
         if(getStatus(reply.status)==="succesfull"){
             const data = await reply.json();
+            
             console.log(data);
             
             printData(data.name,data.main.temp,data.weather[0].description,data.main.feels_like,data.main.humidity,data.main.pressure,data.wind.speed,data.main.temp_max,data.main.temp_min,data.weather[0].main);
 
             setDataInBrowser(data.name,data.main.temp,data.main.temp_max,data.main.temp_min)
 
+
+
         }else{
             // imprimimos los errores con la función imprimir errores
-            console.log(getStatus(reply.status));
+            printErrors(getStatus(reply.status));
         }
 
     } catch(error){
         console.warn(error.message);
+        printErrors(error.message);
     }
 }
 
@@ -164,6 +205,59 @@ const getIcon = (WeatherDesc) =>{
 }
 
 const setDataInBrowser =  (city,temp,tempMax,tempMin) => {
-    console.log('pendiente' + city + temp + tempMax + tempMin)
+
+    if(typeof(Storage)!== "undefined"){
+        temp = Math.round(temp);
+        tempMax = Math.round(tempMax);
+        tempMin = Math.round(tempMin);
+
+        let localItems = JSON.parse(localStorage.getItem('localItem'))
+
+        if(localItems === null){
+            record = []
+        }else{
+            record = localItems;
+        }
+        record.push(`<div class='item'><div class='item__city'>${city}</div><div class='item__temps'>${tempMax} / ${tempMin}</div><div class='item__main-temp'>${temp}</div></div>`);
+        localStorage.setItem('localitem', JSON.stringify(record))
+        console.log('Se guardaron los datos correctamente en LocalStorage')
+
+    }else{
+        printErrors('Su navegador no soporta LocalStorage')
+    }
+    
+
 }
+
+const getDataFromBrowser = () =>{ 
+    if(typeof(Storage)!== "undefined"){
+        
+        let outPut = '';
+        let localItems = JSON.parse(localStorage.getItem('localitem'));    
+        // console.log(typeof(localItems));
+
+        if(localItems === null){
+            record = []
+        }else{
+            record = localItems;
+        }
+
+        record.forEach((data, index) => {
+            outPut += `${data}`;
+        });
+
+        return outPut;
+
+    }else{
+        return 'Su navegador no soporta LocalStorage';
+    }
+}
+
+
+
+
+
+
+
+
 
