@@ -8,8 +8,14 @@
     <link rel="stylesheet" href="css/styles.css">
     <title>Weather app</title>
 </head>
-<body>
+<body  clas="day" id="background">
     <div class="container">
+        <div class="info__location-container">
+            <form class='search-form' id="search-form">
+                <input type="text" class="city-input" id="city-input">
+                <input type="submit" class="hide" id="send">
+            </form>
+        </div>
         <div class="weather">
             <button class="weather__Record" id="open-record">Historial</button>
             <button class="weather__converter" id="converter">Fa</button>
@@ -31,12 +37,7 @@
                 <div class="info-today__feels" id="feels"></div>
             </div>
         </div>
-        <div class="info__location-container">
-            <form>
-                <input type="text" class="">
-                <input type="submit" class="" id="send">
-            </form>
-        </div>
+        
     </div>
     <div class="window-record" id="window-record">
         <button class='button-close-record' id='close-record'>X</button>
