@@ -224,14 +224,14 @@ const printData = (city,temp,desc,feels,humidity,pressure,windSpeed,tempMax,temp
     // nombre de la ciudad
     cityDiv.innerHTML = city;
     // temperatura
-    tempDiv.innerHTML = `<span class='value-temp' id='valueTemp'>${Math.round(temp)}</span><span class='extent-temp' id='extentTemp'>°C</span>`;
+    tempDiv.innerHTML = `<span class='value-temp' id='valueTemp'>${Math.round(temp)}</span><sup class='extent-temp' id='extentTemp'>°C</sup>`;
     //Descripción del clima
     descDiv.innerHTML = desc;
     // temperatura máx y min
-    tempMaxDiv.innerHTML = `<span class='title'>Temperatura Max: </span><span class='value-tempMax' id='valueTempMax'>${Math.round(tempMax)}</span><span id='extentTempMax'>°C</span>`;
-    tempMinDiv.innerHTML = `<span class='title'>Temperatura Min: </span><span class='value-tempMin' id='valueTempMin'>${Math.round(tempMin)}</span><span id='extentTempMin'>°C</span>`;
+    tempMaxDiv.innerHTML = `<span class='title'>Temperatura Max: </span><span class='value-tempMax' id='valueTempMax'>${Math.round(tempMax)}</span><sup id='extentTempMax'>°C</sup>`;
+    tempMinDiv.innerHTML = `<span class='title'>Temperatura Min: </span><span class='value-tempMin' id='valueTempMin'>${Math.round(tempMin)}</span><sup id='extentTempMin'>°C</sup>`;
     //sensación térmica
-    feelsDiv.innerHTML = `<span class='title'>Sensación térmica: </span><span class='value-feels' id='valueFeels'>${Math.round(feels)}</span><span id='extentFeels'>°C</span>`;
+    feelsDiv.innerHTML = `<span class='title'>Sensación térmica: </span><span class='value-feels' id='valueFeels'>${Math.round(feels)}</span><sup id='extentFeels'>°C</sup>`;
     // Humedad
     humidityDiv.innerHTML = `<span class='title'>Humedad: </span><span class='value'>${humidity}%</span>`;
     // presión
@@ -382,11 +382,11 @@ const setBackgroundImage = (dateTime) =>{
     }
 }
 
-const getCelsiusToFahrenheit = (celsius) =>{
+const getCelsiusToFahrenheit = (celsius) => {
     return celsius * 9 / 5.0 + 32;
 }
 
-const getFahrenheitToCelsius = (fahrenheit) =>{
+const getFahrenheitToCelsius = (fahrenheit) => {
     return (fahrenheit - 32) * 5 / 9.0;
 }
 
