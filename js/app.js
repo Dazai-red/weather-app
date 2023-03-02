@@ -36,8 +36,8 @@ window.addEventListener('load', ()=> {
 
     cityForm.addEventListener('submit', event =>{
         event.preventDefault();
-        console.log(cityInput.value);
         getWeatherByCity(cityInput.value);
+        cityInput.value = '';
     });
 
     converterButton.addEventListener('click', () => {

@@ -1,38 +1,121 @@
 /* Modelo mobile first */
-body{
+
+*{
+    box-sizing: border-box;
+}
+
+.backgorund{
+    font-family: 'Noto Sans', sans-serif;
     margin: 0;
     width: 100%;
     height: 100vh;
-    font-family: 'Montserrat', sans-serif;
-    background-color: royalblue;
-    justify-content: center;
+    background-color: #ccc;
+    
 }
 
-
 .background--day{
-    background-color: royalblue;
+    background-color: #417AD0;
 }
 
 .background--night{
     background-color: grey;
 }
 
-.container {
-    width: 50%;
-    height: 400px;
-    background-color: #222831;
-    border-radius: 25px;
-    box-shadow: 0 0 70px -10px rgb(0 0 0 / 20%);
+.wrapper{
+    width: 100%;
+    height: 100vh;
+}
+
+.wrapper__main-content{
+    height: 50%;
+}
+
+.interactive{
+    display: flex;
+    padding: 11px 12px;
+    justify-content: center;
+    gap: 17px;
+}
+
+.interactive__record-button{
+    background-color: transparent;
+    border: none;
     color: #fff;
 }
 
-.interactive__converter-button {
-    background-color: white;
+.record-icon{
+    font-size: 1.43em;
+}
+
+.interactive__form{
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 4px 5px 5px -3px rgba(0,0,0,0.6);
+}
+
+.city-input{
+    width: 187px;
+    height: 24px;
+    padding: 6px;
+    border-radius: 1px;
+    border: none;
+}
+
+.city-input:focus {
+    outline: none;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 10px;
+}
+
+.city-input::placeholder{
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 10px;
+}
+
+.send-button{
+    background-color: #01A4FF;
+    color: #fff;
+    border: none;
+    width: 25px;
+    height: 24px;
+    text-align: left;
+    border-radius: 1px;
+}
+
+.search-icon{
+    font-size: 13px;
+}
+
+.interactive__converter-button{
+    border: none;
+    background-color: #fff;
+    color: #000000;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 14px;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    border-radius: 26px;
 }
 
 .interactive__converter-button--pressed{
-    background-color: red;
+    background-color: #000000;
+    color: #fff;
 }
+
+
+.wrapper__other-statistics{
+    height: 50%;
+}
+
+.title-desktop{
+    display: none;
+}
+
+
 
 .record-window{
     display: none;
