@@ -6,7 +6,12 @@ body{
     background-color: blue;
     justify-content: center;
 }
-    
+   
+.weather__temperature{
+    color: red;
+}
+
+
 .day{
     background-color: royalblue;
 }
@@ -25,7 +30,7 @@ body{
 }
 
 .window-record{
-    display: none;
+    display: block;
 }
 
 .window-record.window-record--open{

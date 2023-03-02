@@ -6,47 +6,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/styles-dist.css">
+    <script src="https://kit.fontawesome.com/fd48554932.js" crossorigin="anonymous"></script>
     <title>Weather app</title>
 </head>
-<body  clas="day" id="background">
-    <div class="container">
-        <div class="info__location-container">
-            <form class='search-form' id="search-form">
-                <input type="text" class="city-input" id="city-input">
-                <input type="submit" class="hide" id="send">
-            </form>
-        </div>
-        <div class="weather">
-            <button class="weather__Record" id="open-record">Historial</button>
-            <button class="weather__converter" id="converter">Fa</button>
-            <div class="weather__date" id="date"></div>
-            <div class="weather__city" id="city"></div>
-            <div class="weather__info">
-                <div class="weather__info__icon-container" id="icon"></div>
-                <div class="weather__info__temp" id="temp"></div>
-                <div class="weather__info__desc" id="desc"></div>
+<body class="day" id="background">
+    <div class="wrapper">
+        <div class="wrapper__main-content">
+            <div class="interactive">
+                <button class="interactive__record-button" id="record-button"><i class="record-icon fa-regular fa-clock"></i></button>
+                <form class="interactive__form">
+                    <input type="text" class="city-input" id="city-input" placeholder="Introduce tu ciudad...">
+                    <input type="submit" class="send-button" id="send-input">
+                </form>
+                <button class="interactive__converter-button" id="converter-button"><sup>°</sup>F</button>
+            </div>
+            <div class="weather">
+                <div class="weather__city-​​name" id="city-name-box">Mijas costa</div>
+                <div class="weather__icon" id="icon-box"><img src="assets/icons/day.svg" alt="icono"></div>
+                <div class="weather__temperature"><span id="value-temp-box">13</span><span id="extent-temp-box"><sup>°</sup>C</span></div>
+                <div class="weather__description-and-max-min">
+                    <span id="desc-temp-box">Despejado</span>
+                    <span id="value-temp-max-box">15</span>
+                    <sup>°</sup>
+                    /
+                    <span id="value-temp-min-box">15</span>
+                    <sup>°</sup>
+                </div>
+                <div class="weather__date-and-time" id="date-and-time-box">Lunes 20 Febrero de 2023, 02:07 PM</div>
             </div>
         </div>
-        <div class="info">
-            <div class="info-today">
-                <div class="info-today__tempMax" id="tempMax"></div>
-                <div class="info-today__tempMin" id="tempMin"></div>
-                <div class="info-today__humidity" id="humidity"></div>
-                <div class="info-today__windSpeed" id="windSpeed"></div>
-                <div class="info-today__pressure" id="pressure"></div>
-                <div class="info-today__feels" id="feels"></div>
+        <div class="wrapper__other-statistics">
+            <h2 class="title-desktop">Estadísticas de hoy</h2>
+            <div class="weather-info">
+                <div class="weather-info__container">
+                    <div class="weather-info__container__description">Humedad</div>
+                    <div class="weather-info__container__value" id="humidity-value-box">37%</div>
+                </div>
+                <div class="weather-info__container">
+                    <div class="weather-info__container__description">Sensación térmica</div>
+                    <div class="weather-info__container__value"><span id="feels-value-box">13</span><span>°</span></div>
+                </div>
+                <div class="weather-info__container">
+                    <div class="weather-info__container__description">Presión</div>
+                    <div class="weather-info__container__value" id="presure-box">1010mbar</div>
+                </div>
+                <div class="weather-info__container">
+                    <div class="weather-info__container__description">Velocidad del viento</div>
+                    <div class="weather-info__container__value" id="wind-speed-box">30%</div> 
+                </div>
             </div>
         </div>
-        
     </div>
-    <div class="window-record" id="window-record">
-        <button class='button-close-record' id='close-record'>X</button>
-        <button class='button-clear-record' id='clear-record'>limpiar historial</button>
-        <div class="window-record-container" id="record-container"></div>
+    <div class="record-window" id="record-window">
+        <header class="record-window__header">
+            <button class="back-button"><i class="fa-solid fa-arrow-left"></i></button>
+            <h2 class="title">Historial de ciudades</h2>
+        </header>
+        <button class="clear-record-button" id="clear-record-button">Limpiar historial</button>
+        <ul class="record-container" id="record-container">
+            <li class="record-container__item">
+                <div class="separator">
+                    <div class='item__city'>Mijas Costa</div>
+                    <div class='item__temps'>15<sup>°</sup> / 8<sup>°</sup></div>
+                </div>
+                <div class='item__main-temp'>13<sup>°</sup></div>
+            </li>
+            <li class="record-container__item">
+                <div class="separator">
+                    <div class='item__city'>Mijas Costa</div>
+                    <div class='item__temps'>15<sup>°</sup> / 8<sup>°</sup></div>
+                </div>
+                <div class='item__main-temp'>13<sup>°</sup></div>
+            </li>
+            <li class="record-container__item">
+                <div class="separator">
+                    <div class='item__city'>Mijas Costa</div>
+                    <div class='item__temps'>15<sup>°</sup> / 8<sup>°</sup></div>
+                </div>
+                <div class='item__main-temp'>13<sup>°</sup></div>
+            </li>
+        </ul>
     </div>
-    <div class="window-errors" id="window-errors">
-        <button class="button-close-errors" id="close-errors">X</button>
-        <div class="window-errors-container" id="errors-container"></div>
+    <div class="error-window" id="error-window">
+        <div class="window">
+            <div class="window__logo">X</div>
+            <div class="window__separator">
+                <div class="text-error">ERROR</div>
+                <div class="error-message" id="error-container">No se ha podido obtener tu posición en un tiempo prudencial</div>
+            </div>
+            <button class="window__exit-button" id="close-error-window-button">OK</button>
+        </div>
     </div>
     <script src="js/app.js"></script>
 </body>
