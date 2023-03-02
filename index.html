@@ -9,12 +9,12 @@
     <script src="https://kit.fontawesome.com/fd48554932.js" crossorigin="anonymous"></script>
     <title>Weather app</title>
 </head>
-<body class="day" id="background">
+<body class="background" id="background">
     <div class="wrapper">
         <div class="wrapper__main-content">
             <div class="interactive">
                 <button class="interactive__record-button" id="record-button"><i class="record-icon fa-regular fa-clock"></i></button>
-                <form class="interactive__form">
+                <form class="interactive__form" id="city-form">
                     <input type="text" class="city-input" id="city-input" placeholder="Introduce tu ciudad...">
                     <input type="submit" class="send-button" id="send-input">
                 </form>
@@ -59,7 +59,7 @@
     </div>
     <div class="record-window" id="record-window">
         <header class="record-window__header">
-            <button class="back-button"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="back-button" id="close-record-button"><i class="fa-solid fa-arrow-left"></i></button>
             <h2 class="title">Historial de ciudades</h2>
         </header>
         <button class="clear-record-button" id="clear-record-button">Limpiar historial</button>

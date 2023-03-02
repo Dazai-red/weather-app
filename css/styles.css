@@ -1,22 +1,19 @@
+/* Modelo mobile first */
 body{
     margin: 0;
     width: 100%;
     height: 100vh;
     font-family: 'Montserrat', sans-serif;
-    background-color: blue;
+    background-color: royalblue;
     justify-content: center;
 }
-   
-.weather__temperature{
-    color: red;
-}
 
 
-.day{
+.background--day{
     background-color: royalblue;
 }
 
-.night{
+.background--night{
     background-color: grey;
 }
 
@@ -29,12 +26,16 @@ body{
     color: #fff;
 }
 
-.window-record{
-    display: block;
+.interactive__converter-button {
+    background-color: white;
 }
 
-.window-record.window-record--open{
-    display: block;
+.interactive__converter-button--pressed{
+    background-color: red;
+}
+
+.record-window{
+    display: none;
     position: absolute;
     top: 0;
     width: 100%;
@@ -42,16 +43,14 @@ body{
     background-color: red;
     color: white;
     z-index: 10;
-
 }
 
-.window-errors{
-    display: none;
-    
-}
-
-.window-errors.window-errors--open{
+.record-window--open{
     display: block;
+}
+
+.error-window{
+    display: none;
     position: absolute;
     background-color: red;
     color: white;
@@ -61,6 +60,10 @@ body{
     right: 0;
     bottom: 0;
     margin: auto;
+}
+
+.error-window--open{
+    display: block;
 }
 
 

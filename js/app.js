@@ -1,40 +1,40 @@
 window.addEventListener('load', ()=> {
 
     background = document.getElementById('background');
-    buttonOpenRecord = document.getElementById('open-record')
-    buttonCloseRecord = document.getElementById('close-record');
-    buttonClearRecord = document.getElementById('clear-record');
-    windowRecord = document.getElementById('window-record');
-    containerRecord = document.getElementById('record-container');
+    openRecordButton = document.getElementById('record-button')
+    closeRecordbutton = document.getElementById('close-record-button');
+    clearRecordButton = document.getElementById('clear-record-button');
+    recordWindow = document.getElementById('record-window');
+    recordContainer = document.getElementById('record-container');
     
-    windowErrors = document.getElementById('window-errors');
-    buttonCloseErrors = document.getElementById('close-errors');
-    containerErrors = document.getElementById('errors-container');
+    errorWindow = document.getElementById('error-window');
+    closeErrorsButton = document.getElementById('close-error-window-button');
+    errorContainer = document.getElementById('error-container');
 
-    searchForm = document.getElementById('search-form');
+    cityForm = document.getElementById('city-form');
     cityInput = document.getElementById('city-input');
 
-    converterButton = document.getElementById('converter');
+    converterButton = document.getElementById('converter-button');
 
-    buttonOpenRecord.addEventListener('click', () => {
-        containerRecord.innerHTML = getDataFromBrowser();
-        windowRecord.classList.add('window-record--open');
+    openRecordButton.addEventListener('click', () => {
+        recordContainer.innerHTML = getDataFromBrowser();
+        recordWindow.classList.add('record-window--open');
     });
 
-    buttonCloseRecord.addEventListener('click', ()=> {
-        windowRecord.classList.remove('window-record--open');
+    closeRecordbutton.addEventListener('click', ()=> {
+        recordWindow.classList.remove('record-window--open');
     });
     
-    buttonClearRecord.addEventListener('click', ()=>{
+    clearRecordButton.addEventListener('click', ()=>{
         localStorage.clear();
-        containerRecord.innerHTML = '';
+        recordContainer.innerHTML = '';
     });
         
-    buttonCloseErrors.addEventListener('click', () =>{
-        windowErrors.classList.remove('window-errors--open');   
+    closeErrorsButton.addEventListener('click', () =>{
+        errorWindow.classList.remove('error-window--open');   
     });
 
-    searchForm.addEventListener('submit', event =>{
+    cityForm.addEventListener('submit', event =>{
         event.preventDefault();
         console.log(cityInput.value);
         getWeatherByCity(cityInput.value);
@@ -43,38 +43,29 @@ window.addEventListener('load', ()=> {
     converterButton.addEventListener('click', () => {
         
         // antes de hacer una petición a la api estos span no existen
-        const valueTemp = document.getElementById('valueTemp');
-        const extentTemp = document.getElementById('extentTemp');
-        const valueTempMax = document.getElementById('valueTempMax');
-        const extentTempMax = document.getElementById('extentTempMax');
-        const valueTempMin = document.getElementById('valueTempMin');
-        const extentTempMin = document.getElementById('extentTempMin');
-        const valueFeels = document.getElementById('valueFeels');
-        const extentFeels = document.getElementById('extentFeels');
+        const valueTemp = document.getElementById('value-temp-box');
+        const extentTemp = document.getElementById('extent-temp-box');
+        const valueTempMax = document.getElementById('value-temp-max-box');
+        const valueTempMin = document.getElementById('value-temp-min-box');
+        const valueFeels = document.getElementById('feels-value-box');
 
-        let pressed = converterButton.classList.contains('pressed');
+        let pressed = converterButton.classList.contains('interactive__converter-button--pressed');
         // Si no le damos permiso de geo no tendremos estos span generados 
         if(valueTemp!=null){
             if(pressed){
-                converterButton.classList.remove('pressed');
+                converterButton.classList.remove('interactive__converter-button--pressed');
                 valueTemp.textContent = Math.round(getFahrenheitToCelsius(valueTemp.innerHTML));
                 extentTemp.textContent = '°C';
                 valueTempMax.textContent = Math.round(getFahrenheitToCelsius(valueTempMax.innerHTML));
-                extentTempMax.textContent = '°C';
                 valueTempMin.textContent = Math.round(getFahrenheitToCelsius(valueTempMin.innerHTML));
-                extentTempMin.textContent = '°C';
                 valueFeels.textContent = Math.round(getFahrenheitToCelsius(valueFeels.innerHTML));
-                extentFeels.textContent = '°C';
             }else{
-                converterButton.classList.add('pressed');
+                converterButton.classList.add('interactive__converter-button--pressed');
                 valueTemp.textContent = Math.round(getCelsiusToFahrenheit(valueTemp.innerHTML));
                 extentTemp.textContent = '°F';
                 valueTempMax.textContent = Math.round(getCelsiusToFahrenheit(valueTempMax.innerHTML));
-                extentTempMax.textContent = '°F';
                 valueTempMin.textContent = Math.round(getCelsiusToFahrenheit(valueTempMin.innerHTML));
-                extentTempMin.textContent = '°F';
                 valueFeels.textContent = Math.round(getCelsiusToFahrenheit(valueFeels.innerHTML));
-                extentFeels.textContent = '°F';
             }
         }
     });
@@ -121,14 +112,14 @@ function geoPosKo(err){
 }
 
 const printErrors = (error) => {
-    windowErrors.classList.add('window-errors--open');
-    containerErrors.innerHTML = error;
+    errorWindow.classList.add('error-window--open');
+    errorContainer.innerHTML = error;
 }
 
 const getWeatherByCoords = async(lat, lon) =>{
     try{
         
-        const reply  = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&units=metric&appid=`)
+        const reply  = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&units=metric&appid=76a6edce82b8fe2b82f08402000b1d77`)
 
         if(getStatus(reply.status)==="succesfull"){
             
@@ -160,7 +151,7 @@ const getWeatherByCoords = async(lat, lon) =>{
 const getWeatherByCity = async (city) => {
     try{
         
-        const reply  = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=es&units=metric&appid=`)
+        const reply  = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=es&units=metric&appid=76a6edce82b8fe2b82f08402000b1d77`)
 
         if(getStatus(reply.status)==="succesfull"){
             
@@ -205,17 +196,17 @@ const getStatus = (status)=>{
 
 const printData = (city,temp,desc,feels,humidity,pressure,windSpeed,tempMax,tempMin,dataWeather)=>{
     
-    const dateDiv = document.getElementById('date');
-    const cityDiv = document.getElementById('city');
-    const iconDiv = document.getElementById('icon');
-    const tempDiv = document.getElementById('temp');
-    const descDiv = document.getElementById('desc');
-    const tempMaxDiv = document.getElementById('tempMax');
-    const tempMinDiv = document.getElementById('tempMin');
-    const humidityDiv = document.getElementById('humidity');
-    const windSpeedDiv = document.getElementById('windSpeed');
-    const pressureDiv = document.getElementById('pressure');
-    const feelsDiv = document.getElementById('feels');
+    const dateDiv = document.getElementById('date-and-time-box');
+    const cityDiv = document.getElementById('city-name-box');
+    const iconDiv = document.getElementById('icon-box');
+    const tempDiv = document.getElementById('value-temp-box');
+    const descDiv = document.getElementById('desc-temp-box');
+    const tempMaxDiv = document.getElementById('value-temp-max-box');
+    const tempMinDiv = document.getElementById('value-temp-min-box');
+    const humidityDiv = document.getElementById('humidity-value-box');
+    const windSpeedDiv = document.getElementById('wind-speed-box');
+    const pressureDiv = document.getElementById('presure-box');
+    const feelsDiv = document.getElementById('feels-value-box');
     
     // icono
     iconDiv.innerHTML =  `<img src="${getIcon(dataWeather)}" alt="icono">`;
@@ -224,20 +215,20 @@ const printData = (city,temp,desc,feels,humidity,pressure,windSpeed,tempMax,temp
     // nombre de la ciudad
     cityDiv.innerHTML = city;
     // temperatura
-    tempDiv.innerHTML = `<span class='value-temp' id='valueTemp'>${Math.round(temp)}</span><sup class='extent-temp' id='extentTemp'>°C</sup>`;
+    tempDiv.innerHTML = Math.round(temp);
     //Descripción del clima
     descDiv.innerHTML = desc;
     // temperatura máx y min
-    tempMaxDiv.innerHTML = `<span class='title'>Temperatura Max: </span><span class='value-tempMax' id='valueTempMax'>${Math.round(tempMax)}</span><sup id='extentTempMax'>°C</sup>`;
-    tempMinDiv.innerHTML = `<span class='title'>Temperatura Min: </span><span class='value-tempMin' id='valueTempMin'>${Math.round(tempMin)}</span><sup id='extentTempMin'>°C</sup>`;
+    tempMaxDiv.innerHTML = Math.round(tempMax);
+    tempMinDiv.innerHTML = Math.round(tempMin);
     //sensación térmica
-    feelsDiv.innerHTML = `<span class='title'>Sensación térmica: </span><span class='value-feels' id='valueFeels'>${Math.round(feels)}</span><sup id='extentFeels'>°C</sup>`;
+    feelsDiv.innerHTML = Math.round(feels);
     // Humedad
-    humidityDiv.innerHTML = `<span class='title'>Humedad: </span><span class='value'>${humidity}%</span>`;
+    humidityDiv.innerHTML = `${humidity}%`;
     // presión
-    pressureDiv.innerHTML = `<span class='title'>Presión: </span><span class='value'>${pressure}mbar</span>`;
+    pressureDiv.innerHTML = `${pressure}mbar`;
     // velocidad de viento
-    windSpeedDiv.innerHTML = `<span class='title'>Velocidad del viento: </span><span class='value'>${windSpeed}m/s</span>`
+    windSpeedDiv.innerHTML = `${windSpeed}m/s`
 
 
 }
@@ -323,7 +314,16 @@ const setDataInBrowser =  (city,temp,tempMax,tempMin) => {
         }else{
             record = localItems;
         }
-        record.push(`<div class='item'><div class='item__city'>${city}</div><div class='item__temps'>${tempMax} / ${tempMin}</div><div class='item__main-temp'>${temp}</div></div>`);
+        /* 
+            <li class="record-container__item">
+                <div class="separator">
+                    <div class='item__city'>${city}</div>
+                    <div class='item__temps'>${tempMax}<sup>°</sup> / ${tempMin}<sup>°</sup></div>
+                </div>
+                <div class='item__main-temp'>${temp}<sup>°</sup></div>
+            </li>
+        */
+        record.push(`<li class="record-container__item"><div class="separator"><div class='item__city'>${city}</div><div class='item__temps'>${tempMax}<sup>°</sup> / ${tempMin}<sup>°</sup></div></div><div class='item__main-temp'>${temp}<sup>°</sup></div></li>`);
         localStorage.setItem('localItem', JSON.stringify(record))
         console.log('Se guardaron los datos correctamente en LocalStorage')
 
@@ -374,11 +374,11 @@ const setBackgroundImage = (dateTime) =>{
     const dayHour = new Date(dateTime*1000).getHours();
     // console.log(dayHour);
     if(dayHour > 6 && dayHour < 18){
-        background.classList.remove('night');
-        background.classList.add('day');
+        background.classList.remove('background--night');
+        background.classList.add('background--day');
     }else{
-        background.classList.remove('day');
-        background.classList.add('night');
+        background.classList.remove('background--day');
+        background.classList.add('background--night');
     }
 }
 
