@@ -119,7 +119,7 @@ const printErrors = (error) => {
 const getWeatherByCoords = async(lat, lon) =>{
     try{
         
-        const reply  = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&units=metric&appid=76a6edce82b8fe2b82f08402000b1d77`)
+        const reply  = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&units=metric&appid=`)
 
         if(getStatus(reply.status)==="succesfull"){
             
@@ -151,7 +151,7 @@ const getWeatherByCoords = async(lat, lon) =>{
 const getWeatherByCity = async (city) => {
     try{
         
-        const reply  = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=es&units=metric&appid=76a6edce82b8fe2b82f08402000b1d77`)
+        const reply  = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=es&units=metric&appid=`)
 
         if(getStatus(reply.status)==="succesfull"){
             
@@ -217,7 +217,7 @@ const printData = (city,temp,desc,feels,humidity,pressure,windSpeed,tempMax,temp
     // temperatura
     tempDiv.innerHTML = Math.round(temp);
     //Descripción del clima
-    descDiv.innerHTML = desc;
+    descDiv.innerHTML = desc[0].toUpperCase() + desc.substring(1);
     // temperatura máx y min
     tempMaxDiv.innerHTML = Math.round(tempMax);
     tempMinDiv.innerHTML = Math.round(tempMin);
