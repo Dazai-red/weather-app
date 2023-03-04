@@ -1,6 +1,7 @@
 window.addEventListener('load', ()=> {
 
     background = document.getElementById('background');
+    wrapperApp = document.getElementById('wrapper-app');
     openRecordButton = document.getElementById('record-button')
     closeRecordbutton = document.getElementById('close-record-button');
     clearRecordButton = document.getElementById('clear-record-button');
@@ -31,7 +32,8 @@ window.addEventListener('load', ()=> {
     });
         
     closeErrorsButton.addEventListener('click', () =>{
-        errorWindow.classList.remove('error-window--open');   
+        errorWindow.classList.remove('error-window--open');
+        wrapperApp.classList.remove('wrapper--blur');   
     });
 
     cityForm.addEventListener('submit', event =>{
@@ -113,13 +115,14 @@ function geoPosKo(err){
 
 const printErrors = (error) => {
     errorWindow.classList.add('error-window--open');
+    wrapperApp.classList.add('wrapper--blur');
     errorContainer.innerHTML = error;
 }
 
 const getWeatherByCoords = async(lat, lon) =>{
     try{
         
-        const reply  = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&units=metric&appid=`)
+        const reply  = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&units=metric&appid=76a6edce82b8fe2b82f08402000b1d77`)
 
         if(getStatus(reply.status)==="succesfull"){
             
@@ -151,7 +154,7 @@ const getWeatherByCoords = async(lat, lon) =>{
 const getWeatherByCity = async (city) => {
     try{
         
-        const reply  = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=es&units=metric&appid=`)
+        const reply  = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=es&units=metric&appid=76a6edce82b8fe2b82f08402000b1d77`)
 
         if(getStatus(reply.status)==="succesfull"){
             
@@ -370,9 +373,9 @@ const setBackgroundImage = (dateTime) =>{
         medianoche UTC del 1 de enero de 1970, sin contar 
         segundos intercalares.
     */
-    // convierte tiempo unix a una hora entendible 
+    // convierte tiempo unix a una hora entendible
     const dayHour = new Date(dateTime*1000).getHours();
-    // console.log(dayHour);
+    console.log(dayHour);
     if(dayHour > 6 && dayHour < 18){
         background.classList.remove('background--night');
         background.classList.add('background--day');

@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/styles-dist.css">
     <script src="https://kit.fontawesome.com/fd48554932.js" crossorigin="anonymous"></script>
-    
+    <link rel="shortcut icon" href="assets/icons/favicon.jpg" type="image/x-icon">
     <title>Weather app</title>
 </head>
-<body class="background--day" id="background">
-    <div class="wrapper">
+<body class="background" id="background">
+    <div class="wrapper" id="wrapper-app">
         <div class="wrapper__main-content">
             <div class="interactive">
                 <button class="interactive__record-button" id="record-button"><i class="record-icon fa-regular fa-clock"></i></button>
@@ -71,8 +71,10 @@
         <div class="window">
             <div class="window__logo">X</div>
             <div class="window__separator">
-                <div class="text-error">ERROR</div>
-                <div class="error-message" id="error-container">No se ha podido obtener tu posición en un tiempo prudencial</div>
+                <div class="text-error">ERROR:</div>
+                <div class="error-message" id="error-container">
+                    No se ha podido obtener tu posición en un tiempo prudencial
+                </div>
             </div>
             <button class="window__exit-button" id="close-error-window-button">OK</button>
         </div>
