@@ -133,7 +133,7 @@
 .weather__description{
     color: #fff;
     font-size: 21px;
-    width: 222px;
+    width: 232px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -230,18 +230,17 @@
     display: block;
     font-family: 'Noto Sans', sans-serif;
     font-weight: 700;
+    font-size: 15px;
     border-radius: 7px;
+    margin-bottom: 24px;
 }
-
-
-
-
 
 .record-container{
     background-color: #000000;
-    padding: 24px 26px;
+    padding: 0 26px;
     margin: 0;
     list-style-type: none;
+    height: 266px;
     overflow: auto;
 }
 
@@ -373,7 +372,6 @@
 @media screen and (min-width:744px) {
     
     .interactive{
-        background-color: #FF0000;
         padding: 11px 12px;
         gap: 20px;
         margin-bottom: 3px;
@@ -413,8 +411,135 @@
        padding-left: 10px;
     }
 
-    .weather{
-        background-color: #353535;
+    [class*='weather__city']{
+        font-size: 34px;
+    }
+
+    .weather__icon{
+        height: 142px;
+    }
+
+    .weather__icon img{
+        width: 160px;
+    }
+
+    .weather__temperature{
+        font-size: 82px;
+        margin-bottom: 20px;
+    }
+
+    .weather__description{
+        font-size: 42px;
+        width: 475px;
+    }
+
+    .date-and-time{
+        font-size: 34px;
+        width: 360px;
+    }
+
+    .wrapper__other-statistics{
+        padding-top: 50px;
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .weather-info{
+        height: 422px;
+        font-size: 28px;
+    }
+
+    .weather-info__container{
+        padding: 14px;
+        height: 62px;
+    }
+
+    .record-window__header{
+        margin-bottom: 73px;
+    }
+
+    .back-button{
+        font-size: 56px;
+        margin-left: 25px;
+    }
+
+    .record-window__header .title{
+        font-size: 41px;
+        margin-left: 38px;
+    }
+
+    .clear-record-button{
+        width: 257px;
+        height: 75px;
+        font-size: 25px;
+        border: 6px solid #FF0000;
+    }
+
+    .record-container{
+        height: 540px;
+    }
+
+    .record-container__item{
+        width: 634px;
+        height: 130px;
+        margin-bottom: 68px;
+    }
+
+    .separator{
+        margin-top: 20px;
+        margin-left: 34px;
+    }
+
+    .item__city{
+        font-size: 34px;
+    }
+
+    .item__temps{
+        font-size: 30px;
+    }
+
+    .item__main-temp{
+        margin-top: 23px;
+        margin-right: 22px;
+        font-size: 62px;
+    }
+
+    .error-window .window{
+        width: 578px;
+        height: 265px;
+    }
+
+    .window__logo{
+        width: 104px;
+        height: 86px;
+        line-height: 86px;
+        font-size: 46px;
+        top: 59px;
+        left: 37px;
+    }
+
+    .window__separator{
+        left: 162px;
+        top: 29px;
+    }
+
+    .text-error{
+        font-size: 34px
+    }
+
+    .error-message{
+        font-size: 22px;
+        width: 378px;
+        height: 100px;
+    }
+
+    .window__exit-button{
+        width: 176px;
+        height: 43px;
+        line-height: 43px;
+        top: 177px;
+        left: 206px;
+        font-size: 28px;
     }
 
 }
