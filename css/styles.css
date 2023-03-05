@@ -777,7 +777,7 @@
 
 }
 
-/* modo claro, oscuro */
+/* modo claro para la ventana de historial */
 
 @media screen and (prefers-color-scheme: light) {
     .record-window .back-button,
@@ -788,7 +788,6 @@
     .record-container{
         background-color: #fff;
     }
-
 }
 
 

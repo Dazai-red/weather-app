@@ -29,6 +29,8 @@ window.addEventListener('load', ()=> {
     clearRecordButton.addEventListener('click', ()=>{
         localStorage.clear();
         recordContainer.innerHTML = '';
+        const audio = new Audio("/assets/audio/empty-recycle-bin-sound.mp3");
+        audio.play();
     });
         
     closeErrorsButton.addEventListener('click', () =>{
@@ -117,6 +119,8 @@ const printErrors = (error) => {
     errorWindow.classList.add('error-window--open');
     wrapperApp.classList.add('wrapper--blur');
     errorContainer.innerHTML = error;
+    const audio = new Audio("/assets/audio/error-sound.mp3");
+    audio.play();
 }
 
 const getWeatherByCoords = async(lat, lon) =>{
