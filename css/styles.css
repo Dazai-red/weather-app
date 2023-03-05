@@ -7,7 +7,6 @@
 .background{
     font-family: 'Noto Sans', sans-serif;
     margin: 0;
-    width: 100%;
     height: 100vh;
     background-color: rgba(65, 122, 208, 85%);
 }
@@ -103,8 +102,6 @@
 .weather{
     font-family: 'Noto Sans', sans-serif;
 }
-
-
 
 [class*='weather__city']{
     font-size: 17px;
@@ -341,7 +338,7 @@
 }
 
 .error-message{
-    color: 11px;
+    font-size: 11px;
     color: #353535;
     font-weight: 400;
 }
@@ -445,7 +442,7 @@
     }
 
     .weather-info{
-        height: 422px;
+        height: 385px;
         font-size: 28px;
     }
 
@@ -544,11 +541,257 @@
 
 }
 
-/*
-    PARA ESCRITORIO
+/* Diseño de desktop */
+@media screen and (min-width:1024px) {
+    .background{
+        background-color: transparent;
+        background-image: url("./../assets/img/day.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding-top: 65px;
+    }
+
+    .background--day{
+        background-image: url("./../assets/img/day.jpg");
+    }
+
+    .background--night{
+        background-image: url("./../assets/img/night.jpg");
+    }
+
+    .wrapper{
+        background-color: rgba(156, 156, 156, 80%);
+        min-height: 545px;
+        
+        height: 90%;
+        max-height: 1575px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 20px;
+        display: flex;
+        max-width: 1574px;
+    }
+
+    .wrapper__main-content{
+        max-width: 302px;
+    }
+
+    .interactive{
+        padding-top: 21px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 15px;
+        gap: 15px;
+    }
+
+    .record-icon{
+        font-size: 22px;
+    }
+    
+    .city-input{
+        width: 163px;
+        height: 29px;
+        padding: 7px;
+        border-radius: 1px;
+    }
+
+    .city-input::placeholder,
+    .city-input:focus {
+        font-size: 13px;
+    }
+
+    .send-button{
+        width: 21px;
+        height: 29px;
+    }
+
+    .search-icon{
+        font-size: 10.48px;
+    }
+
+    .interactive__converter-button {
+        width: 29px;
+        height: 29px;
+        font-size: 17px;
+        padding-left: 7px;
+    }
+
+    [class*='weather__city']{
+        font-size: 20px;
+        margin-bottom: -24px;
+    }
+
+    .weather__icon{
+        height: 234px;
+        margin-bottom: 0;
+    }
+    
+    .weather__icon img{
+        width: 234px;
+    }
+
+    .weather__temperature{
+        font-size: 40px;
+        margin-bottom: 15px;
+        margin-top: -32px;
+    }
+
+    .weather__description{
+        margin-left: 39px;
+        width: 263px;
+        font-size: 23px;
+    }
+
+    .date-and-time{
+        width: 226px;
+        margin-top: 15px;
+        font-size: 19px;
+    }
+
+    .wrapper__other-statistics{
+        background-color: #CAD1D1;
+        width: 90%;
+        padding: 33px 53px;
+        height: 100%;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .title-desktop{
+        display: block;
+        margin-top: 0;
+        font-size: 31px;
+        font-weight: 500;
+        margin-bottom: 43px;
+    }
+
+    .weather-info{
+        width: 100%;
+        height: 380px;
+        padding: 12px 20px;
+        background-color: #FEFCFC;
+        font-size: 28px;
+    }
+
+    .weather-info__container{
+        padding: 28px;
+        height: 85px;
+        border-bottom: 2px solid #000000;
+    }
+
+    .weather-info__container__description,
+    .weather-info__container__value{
+        color: #000000;
+    }
+
+    .interactive__record-button:hover,
+    .interactive__converter-button:hover,
+    .send-button,
+    .record-window .back-button{
+        cursor: pointer;
+    }
+
+    .record-window{
+        min-height: 100vh;
+        height: auto;
+    }
+    .record-window__header{
+        padding-top: 15px;
+        margin-bottom: 29px;
+    }
+    
+    .back-button{
+        margin-left: 22px;
+    }
+
+    .record-window__header .title{
+        font-size: 46px;
+        margin-left: 49px;
+    }
+
+    .clear-record-button{
+        margin-bottom: 47px;
+    }
+
     .clear-record-button:hover{
-    color: #000000;
-    background-color: #FF0000;
-    border: 2px solid #000000;
+        color: #000000;
+        background-color: #FF0000;
+        cursor: pointer;
+    }
+
+    .record-container{
+        padding: 0 222px;
+        overflow: visible;
+        background-color: #000000;
+        height: auto;
+    }
+
+    .record-container__item{
+        width: 845px;
+        height: 130px;
+    }
+
+    .error-window .window{
+        width: 1000px;
+        height: 339px;
+    }
+    .window__logo{
+        width: 109px;
+        height: 95px;
+        line-height: 95px;
+        font-size: 46px;
+        top: 77px;
+        left: 89px;
+    }
+
+    .window__separator{
+        left: 230px;
+        top: 56px;
+    }
+
+    .text-error{
+        font-size: 34px;
+        margin-bottom: 19px;
+    }
+
+    .error-message{
+        font-size: 22px;
+        width: 736px;
+    }
+
+    .window__exit-button{
+        width: 165px;
+        height: 45px;
+        line-height: 45px;
+        top: 262px;
+        left: 415px;
+        font-size: 28px;
+    }
+
+    .window__exit-button:hover{
+        background-color: #353535;
+        color:  #BABABA;
+        cursor: pointer;
+    }
+
 }
-*/
+
+/* modo claro, oscuro */
+
+@media screen and (prefers-color-scheme: light) {
+    .record-window .back-button,
+    .record-window .title{
+        color: #000000;
+    }
+    .record-window,
+    .record-container{
+        background-color: #fff;
+    }
+
+}
+
+
+
+
+    
