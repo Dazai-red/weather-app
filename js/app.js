@@ -40,7 +40,8 @@ window.addEventListener('load', ()=> {
 
     cityForm.addEventListener('submit', event =>{
         event.preventDefault();
-        getWeatherByCity(cityInput.value);
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&lang=es&units=metric&appid=76a6edce82b8fe2b82f08402000b1d77`
+        getWeather(url);
         cityInput.value = '';
     });
 
@@ -89,7 +90,9 @@ function geoPosOk(pos){
 
     console.log(`Estas en la posición: ${lat}, ${lon}`);
 
-    getWeatherByCoords(lat,lon);
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&units=metric&appid=76a6edce82b8fe2b82f08402000b1d77`
+
+    getWeather(url);
 
 }
 
@@ -123,42 +126,10 @@ const printErrors = (error) => {
     audio.play();
 }
 
-const getWeatherByCoords = async(lat, lon) =>{
+const getWeather = async(url) =>{
     try{
         
-        const reply  = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&units=metric&appid=76a6edce82b8fe2b82f08402000b1d77`)
-
-        if(getStatus(reply.status)==="succesfull"){
-            
-            const data = await reply.json();
-            
-            console.log(data);
-            
-            // imprime los datos 
-            printData(data.name,data.main.temp,data.weather[0].description,data.main.feels_like,data.main.humidity,data.main.pressure,data.wind.speed,data.main.temp_max,data.main.temp_min,data.weather[0].main);
-
-            // Pasa los datos al LocalStorage del navegador del cliente
-            setDataInBrowser(data.name,data.main.temp,data.main.temp_max,data.main.temp_min)
-
-            // le pasamos el dataTime de cuando se hizo la petición
-            setBackgroundImage(data.dt);
-
-        }else{
-            // imprimimos los errores con la función imprimir errores
-            console.warn(getStatus(reply.status));
-            printErrors(getStatus(reply.status));
-        }
-
-    } catch(error){
-        console.warn(error.message);
-        printErrors(error.message);
-    }
-}
-
-const getWeatherByCity = async (city) => {
-    try{
-        
-        const reply  = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=es&units=metric&appid=76a6edce82b8fe2b82f08402000b1d77`)
+        const reply  = await fetch(url)
 
         if(getStatus(reply.status)==="succesfull"){
             
@@ -191,13 +162,13 @@ const getStatus = (status)=>{
     if(status === 200){
         return "succesfull";
     }else if(status === 401){
-        return "ERROR 401: API KEY INVALIDA";
+        return "HTTP 401: API KEY INVALIDA";
     }else if(status === 404){
-        return "ERROR 404: Ciudad no valida";
+        return "HTTP 404: Ciudad no valida";
     }else if(status === 400){
-        return "ERROR 400: No has introducido ciudad";
+        return "HTTP 400: No has introducido ciudad";
     }else{
-        return "ERROR DESCONOCIDO.";
+        return "HTTP ERROR DESCONOCIDO.";
     }
 }
 
@@ -242,16 +213,6 @@ const printData = (city,temp,desc,feels,humidity,pressure,windSpeed,tempMax,temp
 
 const getDateTime = () =>{
 
-    /* 
-        Otra forma de hacerlo pero más compleja:
-        let date = new Date().toLocaleString("es-ES", {
-            timeStyle: "long",
-            dateStyle: "short",
-            hour12: true
-        });
-        console.log(date); Nos daria el siguiente formato: 21/2/23, 1:11:03 p. m. CET
-    */
-
     const now = new Date();
     let hour = now.getHours();
     let min = now.getMinutes();
@@ -260,7 +221,6 @@ const getDateTime = () =>{
     const dayWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
     const monthYear = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-    
     
     if(hour > 12){
         system = 'PM'
@@ -321,7 +281,9 @@ const setDataInBrowser =  (city,temp,tempMax,tempMin) => {
         }else{
             record = localItems;
         }
-        /* 
+        
+        /*  
+            // Plantilla de la estructura HTML 
             <li class="record-container__item">
                 <div class="separator">
                     <div class='item__city'>${city}</div>
